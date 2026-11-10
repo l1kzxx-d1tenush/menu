@@ -10,9 +10,11 @@ jobs:
           SDK=$(xcrun --sdk iphoneos --show-sdk-path)
           xcrun --sdk iphoneos clang -arch arm64 -isysroot "$SDK" \
             -miphoneos-version-min=13.0 -dynamiclib -fobjc-arc \
-            -Wno-deprecated-declarations -framework UIKit -framework Foundation \
+            -Wno-deprecated-declarations \
+            -framework UIKit -framework Foundation -framework CoreGraphics \
             -install_name @rpath/MenuTweak.dylib -o MenuTweak.dylib Tweak.m
       - uses: actions/upload-artifact@v4
         with:
           name: MenuTweak-dylib
           path: MenuTweak.dylib
+
